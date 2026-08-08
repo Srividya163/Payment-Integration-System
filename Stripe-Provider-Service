@@ -1,0 +1,6 @@
+/**
+* This Stripe-Provider-Service acts like mediator between validation service and Stripe System.
+* It receives the payment request from validation,
+* forwardes to Stripe System and relays the response 
+* back to validation service
+*/
