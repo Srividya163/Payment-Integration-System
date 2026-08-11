@@ -1,0 +1,6 @@
+/**
+* Validation Service works in between Merchant System and Stripe-Provider Service
+* Which is responsible for analyze the requests from 
+* Merchant and forward it to Stripe Service. And
+* again get the response back to Merchant.
+**/
