@@ -1,31 +1,17 @@
 package com.hulkhiretech.payments.pojo;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class PaymentRequest {
+public class PaymentRequest{
 
-    @NotBlank(message = "{SUCCESS_URL_BLANK}")
-    @Pattern(
-            regexp = "^(http|https)://.*$",
-            message = "{SUCCESS_URL_INVALID}"
-    )
-    private String successUrl;
-
-    @NotBlank(message = "{CANCEL_URL_BLANK}")
-    @Pattern(
-            regexp = "^(http|https)://.*$",
-            message = "{CANCEL_URL_INVALID}"
-    )
-    private String cancelUrl;
-
-    @NotEmpty(message = "{LINE_ITEMS_EMPTY}")
+    @NotNull(message = "USER_NULL")
     @Valid
-    private List<LineItems> lineItems;
+    private User user;
+
+    @NotNull(message = "PAYMENT_NULL")
+    @Valid
+    private Payment payment;
 }
