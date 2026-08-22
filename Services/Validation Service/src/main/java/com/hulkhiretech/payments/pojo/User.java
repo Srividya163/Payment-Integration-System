@@ -10,8 +10,9 @@ import lombok.Data;
 public class User {
 
     @NotBlank(message = "END_USER_ID_BLANK")
-    @Size(max = 50, message = "END_USER_ID_TOO_LONG")
+    @Size(max = 64, message = "END_USER_ID_TOO_LONG")
     private String endUserID;
+
 
     @NotBlank(message = "FIRSTNAME_BLANK")
     @Size(max = 50, message = "FIRSTNAME_TOO_LONG")

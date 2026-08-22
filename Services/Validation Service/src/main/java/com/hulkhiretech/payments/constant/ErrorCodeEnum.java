@@ -2,6 +2,8 @@ package com.hulkhiretech.payments.constant;
 
 public enum ErrorCodeEnum {
 
+    GENERIC_ERROR("10000","An unexpected error occurred"),
+
     // ============================================================
     // 1. PAYMENT REQUEST - ROOT OBJECT VALIDATION
     // ============================================================
@@ -14,21 +16,9 @@ public enum ErrorCodeEnum {
     // ============================================================
 
     END_USER_ID_BLANK("10003","End user ID must not be blank"),
-
-    END_USER_ID_TOO_LONG(
-            "10004",
-            "End user ID must not exceed 50 characters"
-    ),
-
-    FIRSTNAME_BLANK(
-            "10005",
-            "First name must not be blank"
-    ),
-
-    FIRSTNAME_TOO_LONG(
-            "10006",
-            "First name must not exceed 50 characters"
-    ),
+    END_USER_ID_TOO_LONG("10004","End user ID must not exceed 50 characters"),
+    FIRSTNAME_BLANK("10005","First name must not be blank"),
+    FIRSTNAME_TOO_LONG("10006","First name must not exceed 50 characters"),
 
     LASTNAME_BLANK(
             "10007",
@@ -170,46 +160,18 @@ public enum ErrorCodeEnum {
     // 4. LINE ITEMS VALIDATION
     // ============================================================
 
-    LINE_ITEM_CURRENCY_BLANK(
-            "10033",
-            "Line item currency must not be blank"
-    ),
-
-    LINE_ITEM_CURRENCY_INVALID(
-            "10034",
-            "Line item currency must be a 3-letter ISO currency code"
-    ),
-
-    PRODUCT_NAME_BLANK(
-            "10035",
-            "Product name must not be blank"
-    ),
-
-    PRODUCT_NAME_TOO_LONG(
-            "10036",
-            "Product name must not exceed 100 characters"
-    ),
-
-    UNIT_AMOUNT_REQUIRED(
-            "10037",
-            "Unit amount is required"
-    ),
-
-    UNIT_AMOUNT_INVALID(
-            "10038",
-            "Unit amount must be greater than 0"
-    ),
-
-    QUANTITY_REQUIRED(
-            "10039",
-            "Quantity must not be null"
-    ),
-
-    QUANTITY_INVALID(
-            "10040",
-            "Quantity must be greater than 0"
-    );
-
+    LINE_ITEM_CURRENCY_BLANK("10033","Line item currency must not be blank"),
+    LINE_ITEM_CURRENCY_INVALID("10034","Line item currency must be a 3-letter ISO currency code"),
+    PRODUCT_NAME_BLANK("10035","Product name must not be blank"),
+    PRODUCT_NAME_TOO_LONG("10036","Product name must not exceed 100 characters"),
+    UNIT_AMOUNT_REQUIRED("10037","Unit amount is required"),
+    UNIT_AMOUNT_INVALID("10038","Unit amount must be greater than 0"),
+    QUANTITY_REQUIRED("10039","Quantity must not be null"),
+    QUANTITY_INVALID("10040","Quantity must be greater than 0"),
+    FIRSTNAME_CONTAINS_HELLO("10041","First name must not contain the word 'hello'"),
+    LASTNAME_CONTAINS_HELLO("10042","Last name must not contain the word 'hello'"),
+    DUPLICATE_TRANSACTION("10043","Duplicate transaction detected"),
+    FAILED_TO_SAVE_PAYMENT_REQUEST("10044","Failed to save payment request due to an unexpected error");
 
     private final String errorCode;
     private final String errorMessage;

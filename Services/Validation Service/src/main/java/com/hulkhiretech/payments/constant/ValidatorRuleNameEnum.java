@@ -2,16 +2,12 @@ package com.hulkhiretech.payments.constant;
 
 import java.util.Optional;
 
-import com.hulkhiretech.payments.service.impl.businessValidator.ValidatorRule1;
-import com.hulkhiretech.payments.service.impl.businessValidator.ValidatorRule3;
-import com.hulkhiretech.payments.service.impl.businessValidator.validatorRule2;
+import com.hulkhiretech.payments.service.impl.businessValidator.DuplicateTxnValidator;
 import com.hulkhiretech.payments.service.interfaces.BusinessValidator;
 
 public enum ValidatorRuleNameEnum {
 
-    VALIDATOR_RULE1("VALIDATOR_RULE1", ValidatorRule1.class),
-    VALIDATOR_RULE2("VALIDATOR_RULE2", validatorRule2.class),
-    VALIDATOR_RULE3("VALIDATOR_RULE3", ValidatorRule3.class);
+    VALIDATOR_RULE1("DUPLICATE_TXN_RULE", DuplicateTxnValidator.class);
 
     private final String ruleName;
     private final Class<? extends BusinessValidator> validatorClass;
