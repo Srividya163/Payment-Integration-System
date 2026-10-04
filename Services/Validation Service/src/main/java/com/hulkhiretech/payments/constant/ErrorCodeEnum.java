@@ -171,7 +171,13 @@ public enum ErrorCodeEnum {
     FIRSTNAME_CONTAINS_HELLO("10041","First name must not contain the word 'hello'"),
     LASTNAME_CONTAINS_HELLO("10042","Last name must not contain the word 'hello'"),
     DUPLICATE_TRANSACTION("10043","Duplicate transaction detected"),
-    FAILED_TO_SAVE_PAYMENT_REQUEST("10044","Failed to save payment request due to an unexpected error");
+    FAILED_TO_SAVE_PAYMENT_REQUEST("10044","Failed to save payment request due to an unexpected error"),
+    INVALID_HMAC("10045","Invalid Hmac Signature"),
+    MISSING_HMAC("10046","Missing Hmac Signature"),
+    HMAC_COMPUTATION_ERROR("10047","Error Computing HMAC signature"),
+    PAYMENT_ATTEMPT_THRESHOLD_EXCEEDED("10048", "Payment attempt threshold exceeded"),
+    NO_VALIDATION_RULES_CONFIGURED("10049", "No validation rules configured in the system");
+
 
     private final String errorCode;
     private final String errorMessage;

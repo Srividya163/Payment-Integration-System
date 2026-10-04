@@ -7,12 +7,19 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Map;
+
 import org.springframework.dao.DuplicateKeyException;
 import com.hulkhiretech.payments.constant.ErrorCodeEnum;
 import com.hulkhiretech.payments.exception.PaymentValidationException;
 import org.springframework.http.HttpStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import java.sql.Timestamp;
+
 
 @Repository
 @Slf4j
@@ -73,4 +80,25 @@ public class MerchantPaymentRequestRepositoryImpl
         return -1;
     }
   }
+  @Override 
+  public int countRequestsForUserInLastMinutes(
+        String endUserId, int minutes){
+            Instant startTime = Instant.now().minus(minutes, ChronoUnit.MINUTES);
+
+            String sql = """
+                SELECT COUNT(*)
+                FROM merchant_payment_request
+                WHERE endUserId = :endUserId
+                  AND creationDate >= :startTime
+                """;
+
+                Map<String, Object> params = Map.of( 
+                    "endUserId", endUserId,
+                    "startTime", Timestamp.from(startTime)
+                );
+
+                Integer count = namedParameterJdbcTemplate.queryForObject(sql, params, Integer.class);
+
+                return count == null ? 0 : count;
+            }
 }

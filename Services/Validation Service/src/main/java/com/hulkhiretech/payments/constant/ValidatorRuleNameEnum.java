@@ -1,13 +1,14 @@
 package com.hulkhiretech.payments.constant;
 
 import java.util.Optional;
-
 import com.hulkhiretech.payments.service.impl.businessValidator.DuplicateTxnValidator;
 import com.hulkhiretech.payments.service.interfaces.BusinessValidator;
+import com.hulkhiretech.payments.service.impl.businessValidator.PaymentAttemptThresholdValidator;
 
 public enum ValidatorRuleNameEnum {
 
-    VALIDATOR_RULE1("DUPLICATE_TXN_RULE", DuplicateTxnValidator.class);
+    DUPLICATE_TXN_RULE("DUPLICATE_TXN_RULE", DuplicateTxnValidator.class),
+    PAYMENT_ATTEMPT_THRESHOLD_RULE("PAYMENT_ATTEMPT_THRESHOLD_RULE", PaymentAttemptThresholdValidator.class);
 
     private final String ruleName;
     private final Class<? extends BusinessValidator> validatorClass;

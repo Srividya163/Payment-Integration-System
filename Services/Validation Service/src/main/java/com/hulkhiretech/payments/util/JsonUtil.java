@@ -1,5 +1,8 @@
 package com.hulkhiretech.payments.util;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.LinkedHashMap;
+
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
@@ -45,5 +48,22 @@ public class JsonUtil {
 			return null;
 		}
 	}
+	public String prepareFormattedJson(String body){
+		//byte[] bodyBytes = request.getInputStream().readAllBytes();
+		//String body = new String(bodyBytes, request.getCharacterEncoding());
+		if (body == null || body.isBlank()) {
+			return "";
+		}
+		try{
+			// Parse JSON while preserving order
+			LinkedHashMap<String, Object> map =
+					objectMapper.readValue(body, LinkedHashMap.class);
+			// Serialize back to JSON
+			return objectMapper.writeValueAsString(map);
+		}catch(Exception e){
+			log.error("Error while formatting JSON body: {}", e.getMessage(), e);
+			return null;
+		}
+}
 }
 

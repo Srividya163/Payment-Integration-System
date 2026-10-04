@@ -31,7 +31,8 @@ public class DuplicateTxnValidator implements BusinessValidator{
         entity.setMerchantTxnReference(paymentRequest.getPayment().getMerchantTxnRef());
         entity.setTransactionRequest(jsonUtil.convertObjectToJson(paymentRequest));
 
-        int pkId =repository.saveMerchantPaymentRequest(entity);
+       int pkId =repository.saveMerchantPaymentRequest(entity); 
+       //int pkId = new Random().nextInt(10);
         log.info("Repository returned primary key id: {}", pkId);
 
         if(pkId == -1){
