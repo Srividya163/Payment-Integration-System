@@ -176,7 +176,9 @@ public enum ErrorCodeEnum {
     MISSING_HMAC("10046","Missing Hmac Signature"),
     HMAC_COMPUTATION_ERROR("10047","Error Computing HMAC signature"),
     PAYMENT_ATTEMPT_THRESHOLD_EXCEEDED("10048", "Payment attempt threshold exceeded"),
-    NO_VALIDATION_RULES_CONFIGURED("10049", "No validation rules configured in the system");
+    NO_VALIDATION_RULES_CONFIGURED("10049", "No validation rules configured in the system"),
+    ERROR_CONNECTING_TO_EXTERNAL_SERVICE("10050", "Error connecting to external service"),
+    INVALID_STRIPE_PROVIDER_RESPONSE("10051", "Invalid response received from Stripe provider");
 
 
     private final String errorCode;

@@ -1,7 +1,9 @@
 package com.hulkhiretech.payments.service.interfaces;
 
 import com.hulkhiretech.payments.pojo.PaymentRequest;
+import com.hulkhiretech.payments.pojo.PaymentResponse;
+
 
 public interface PaymentService {
-    String validateAndCreatePayment(PaymentRequest paymentRequest);
+    PaymentResponse validateAndCreatePayment(PaymentRequest paymentRequest);
 }

@@ -7,6 +7,9 @@ import com.hulkhiretech.payments.exception.PaymentValidationException;
 import com.hulkhiretech.payments.pojo.PaymentRequest;
 import com.hulkhiretech.payments.service.interfaces.BusinessValidator;
 import com.hulkhiretech.payments.service.interfaces.PaymentService;
+import com.hulkhiretech.payments.service.helper.StripeProviderHelper;
+import com.hulkhiretech.payments.http.HttpRequest;
+import com.hulkhiretech.payments.http.HttpServiceEngine;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +17,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import com.hulkhiretech.payments.util.JsonUtil;
+import com.hulkhiretech.payments.stripeprovider.SPPaymentResponse;
+import com.hulkhiretech.payments.pojo.PaymentResponse;
+import org.springframework.http.ResponseEntity;
+
 
 import java.util.Optional;
 import java.util.List;
@@ -25,9 +33,14 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final ApplicationContext applicationContext;
 
+    private final HttpServiceEngine httpServiceEngine;
+
+    private final StripeProviderHelper stripeProviderHelper;
+
     private final ValidatorRuleCache validatorRuleCache;
+
     @Override
-    public String validateAndCreatePayment(PaymentRequest paymentRequest) {
+    public PaymentResponse validateAndCreatePayment(PaymentRequest paymentRequest) {
         // TODO: Implement payment validation and creation logic
 
         log.info("Validating and creating payment : {} ", paymentRequest);
@@ -70,9 +83,18 @@ public class PaymentServiceImpl implements PaymentService {
         paymentRequest);
 
         //code to invoke processing service
+        HttpRequest httpRequest = stripeProviderHelper.createHttpRequest(paymentRequest);
+        log.info("Prepared HttpRequest  for stripe provider: {}", httpRequest);
 
-        String result="From Service payment created successfully!\n" + paymentRequest;
-        log.info("Payment Creation result:{}", result);
-        return result;
+        ResponseEntity<String> httpResponse = httpServiceEngine.makeHttpCall(httpRequest);
+
+        SPPaymentResponse finalResponse = stripeProviderHelper.processResponse(httpResponse);
+        PaymentResponse paymentResponse = new PaymentResponse();
+        paymentResponse.setHostedPageUrl(finalResponse.getHostedPageUrl());
+
+        log.info("Final PaymentCreation to be returned:{}", paymentResponse);
+        return paymentResponse;
     }
 }
+
+        
