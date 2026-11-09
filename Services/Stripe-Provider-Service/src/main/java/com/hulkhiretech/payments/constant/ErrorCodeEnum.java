@@ -23,7 +23,9 @@ public enum ErrorCodeEnum {
 
     ERROR_CONNECTING_TO_EXTERNAL_SERVICE("30012","Error connecting to external payment service"),
     STRIPE_API_ERROR("30013","<Dynamically prepare based on stripe error response>"),
-    INVALID_STRIPE_RESPONSE("30014","Received invalid response from Stripe API");
+    INVALID_STRIPE_RESPONSE("30014","Received invalid response from Stripe API"),
+    MISSING_STRIPE_SIGNATURE_OR_EMPTY_REQUEST("30015","Missing Stripe signature or empty request payload"),
+    STRIPE_SIGNATURE_VERIFICATION_ERROR("30016","Stripe signature verification failed");
 
     private final String errorCode;
     private final String errorMessage;
